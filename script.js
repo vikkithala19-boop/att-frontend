@@ -3,7 +3,7 @@ async function getAttendance(){
 let id = document.getElementById("id").value
 let pass = document.getElementById("pass").value
 
-let res = await fetch("https://att-backend.onrender.com/attendance",{
+let res = await fetch("https://att-backend-lzzv.onrender.com/attendance",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -14,7 +14,11 @@ password:pass
 })
 })
 
-let data = await res.json()
+let text = await res.text()
+
+try{
+
+let data = JSON.parse(text)
 
 let attended = parseInt(data.attended)
 let total = parseInt(data.total)
@@ -27,4 +31,12 @@ document.getElementById("result").innerHTML =
 Attendance: ${percent.toFixed(2)}% <br>
 You can bunk: ${bunk} classes
 `
+
+}catch(err){
+
+document.getElementById("result").innerHTML =
+"Backend error or server waking up. Try again."
+
+}
+
 }
