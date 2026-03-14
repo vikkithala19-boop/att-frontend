@@ -6,7 +6,7 @@ let pass=document.getElementById("pass").value
 let result=document.getElementById("result")
 let subjects=document.getElementById("subjects")
 
-result.innerHTML="Irunga Bhai..."
+result.innerHTML="Loading..."
 subjects.innerHTML=""
 
 try{
@@ -31,15 +31,12 @@ return
 
 let percent=data.attendance
 
-// show overall attendance
-result.innerHTML=`
-Attendance: ${percent}% <br>
-Last Updated: ${data.updated || "Today"}
-`
+result.innerHTML=
+`Attendance: ${percent}% <br>
+Last Updated: Today`
 
-// create table
 let table=`
-<table border="1" style="margin:auto;margin-top:20px">
+<table>
 <tr>
 <th>Course Code</th>
 <th>Subject</th>
@@ -50,14 +47,13 @@ let table=`
 
 data.subjects.forEach(s=>{
 
-let present=parseInt(s.present)
 let total=parseInt(s.total)
+let present=parseInt(s.present)
 
 let percent=((present/total)*100).toFixed(2)
 
 let status=""
 
-// accurate 75% calculation
 if(present/total < 0.75){
 
 let attend=Math.ceil((0.75*total-present)/(1-0.75))
