@@ -1,9 +1,12 @@
 async function getAttendance(){
 
-document.getElementById("result").innerHTML="Checking attendance..."
-
 let id=document.getElementById("id").value
 let pass=document.getElementById("pass").value
+
+let result=document.getElementById("result")
+let subjects=document.getElementById("subjects")
+
+result.innerHTML="Loading..."
 
 let res=await fetch("https://att-backend-lzzv.onrender.com/attendance",{
 method:"POST",
@@ -18,22 +21,23 @@ password:pass
 
 let data=await res.json()
 
-let attended=parseInt(data.attended)
-let total=parseInt(data.total)
+if(data.error){
+result.innerHTML=data.error
+return
+}
 
-let percent=(attended/total)*100
+let percent=data.attendance
 
-document.getElementById("progress").style.width=percent+"%"
+let total=100
+let attended=(percent/100)*total
 
 if(percent>=75){
 
-let bunk=Math.floor((attended/0.75)-total)
+let bunk=Math.floor(attended/0.75-total)
 
-document.getElementById("result").innerHTML=
-`
-Attendance: ${percent.toFixed(2)}% <br>
-You can bunk: ${bunk} classes
-`
+result.innerHTML=
+`Attendance: ${percent}% <br>
+You can bunk ${bunk} classes`
 
 }else{
 
@@ -43,12 +47,19 @@ while((attended+need)/(total+need)<0.75){
 need++
 }
 
-document.getElementById("result").innerHTML=
-`
-Attendance: ${percent.toFixed(2)}% <br>
-You must attend ${need} classes to reach 75%
-`
-
+result.innerHTML=
+`Attendance: ${percent}% <br>
+You must attend ${need} classes to reach 75%`
 }
+
+let table="<table><tr><th>Course</th><th>Attendance</th></tr>"
+
+data.subjects.forEach(s=>{
+table+=`<tr><td>${s.course}</td><td>${s.percent}%</td></tr>`
+})
+
+table+="</table>"
+
+subjects.innerHTML=table
 
 }
