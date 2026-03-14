@@ -6,7 +6,7 @@ let pass=document.getElementById("pass").value
 let result=document.getElementById("result")
 let subjects=document.getElementById("subjects")
 
-result.innerHTML="Loading..."
+result.innerHTML="Irunga Bhai..."
 subjects.innerHTML=""
 
 try{
