@@ -3,7 +3,7 @@ async function getAttendance(){
 let id = document.getElementById("id").value
 let pass = document.getElementById("pass").value
 
-let res = await fetch("https://att-backend-lzzv.onrender.com/",{
+let res = await fetch("https://att-backend-lzzv.onrender.com/attendance",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
