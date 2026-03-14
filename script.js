@@ -7,6 +7,9 @@ let result=document.getElementById("result")
 let subjects=document.getElementById("subjects")
 
 result.innerHTML="Loading..."
+subjects.innerHTML=""
+
+try{
 
 let res=await fetch("https://att-backend-lzzv.onrender.com/attendance",{
 method:"POST",
@@ -52,14 +55,47 @@ result.innerHTML=
 You must attend ${need} classes to reach 75%`
 }
 
-let table="<table><tr><th>Course</th><th>Attendance</th></tr>"
+let table="<table><tr><th>Course Code</th><th>Subject</th><th>Attendance</th><th>Status</th></tr>"
 
 data.subjects.forEach(s=>{
-table+=`<tr><td>${s.course}</td><td>${s.percent}%</td></tr>`
+
+let p=parseFloat(s.percent)
+
+let status=""
+
+if(p>=75){
+
+let bunk=Math.floor((p-75)/75*100)
+
+status=`Bunk ${bunk} classes`
+
+}else{
+
+let attend=Math.ceil((75-p)/75*100)
+
+status=`Attend ${attend} classes`
+
+}
+
+table+=`
+<tr>
+<td>${s.course}</td>
+<td>${s.name}</td>
+<td>${s.percent}%</td>
+<td>${status}</td>
+</tr>
+`
+
 })
 
 table+="</table>"
 
 subjects.innerHTML=table
+
+}catch(err){
+
+result.innerHTML="Server error or backend sleeping (Render cold start). Try again."
+
+}
 
 }
