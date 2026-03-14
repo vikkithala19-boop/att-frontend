@@ -31,49 +31,44 @@ return
 
 let percent=data.attendance
 
-let total=100
-let attended=(percent/100)*total
+// show overall attendance
+result.innerHTML=`
+Attendance: ${percent}% <br>
+Last Updated: ${data.updated || "Today"}
+`
 
-if(percent>=75){
-
-let bunk=Math.floor(attended/0.75-total)
-
-result.innerHTML=
-`Attendance: ${percent}% <br>
-You can bunk ${bunk} classes`
-
-}else{
-
-let need=0
-
-while((attended+need)/(total+need)<0.75){
-need++
-}
-
-result.innerHTML=
-`Attendance: ${percent}% <br>
-You must attend ${need} classes to reach 75%`
-}
-
-let table="<table><tr><th>Course Code</th><th>Subject</th><th>Attendance</th><th>Status</th></tr>"
+// create table
+let table=`
+<table border="1" style="margin:auto;margin-top:20px">
+<tr>
+<th>Course Code</th>
+<th>Subject</th>
+<th>Attendance</th>
+<th>Status</th>
+</tr>
+`
 
 data.subjects.forEach(s=>{
 
-let p=parseFloat(s.percent)
+let present=parseInt(s.present)
+let total=parseInt(s.total)
+
+let percent=((present/total)*100).toFixed(2)
 
 let status=""
 
-if(p>=75){
+// accurate 75% calculation
+if(present/total < 0.75){
 
-let bunk=Math.floor((p-75)/75*100)
+let attend=Math.ceil((0.75*total-present)/(1-0.75))
 
-status=`Bunk ${bunk} classes`
+status=`Attend ${attend} classes`
 
 }else{
 
-let attend=Math.ceil((75-p)/75*100)
+let bunk=Math.floor((present-0.75*total)/0.75)
 
-status=`Attend ${attend} classes`
+status=`Bunk ${bunk} classes`
 
 }
 
@@ -81,7 +76,7 @@ table+=`
 <tr>
 <td>${s.course}</td>
 <td>${s.name}</td>
-<td>${s.percent}%</td>
+<td>${percent}%</td>
 <td>${status}</td>
 </tr>
 `
