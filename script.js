@@ -1,17 +1,17 @@
 async function getAttendance(){
 
-let id=document.getElementById("id").value
-let pass=document.getElementById("pass").value
+let id = document.getElementById("id").value
+let pass = document.getElementById("pass").value
 
-let result=document.getElementById("result")
-let subjects=document.getElementById("subjects")
+let result = document.getElementById("result")
+let subjects = document.getElementById("subjects")
 
-result.innerHTML="Irunga Bhai..."
-subjects.innerHTML=""
+result.innerHTML = "Irunga bhai..."
+subjects.innerHTML = ""
 
 try{
 
-let res=await fetch("https://att-backend-lzzv.onrender.com/attendance",{
+let res = await fetch("https://att-backend-lzzv.onrender.com/attendance",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -22,21 +22,22 @@ password:pass
 })
 })
 
-let data=await res.json()
+let data = await res.json()
 
 if(data.error){
-result.innerHTML=data.error
+result.innerHTML = data.error
 return
 }
 
-let percent=data.attendance
+let percent = data.attendance
 
-result.innerHTML=
+result.innerHTML =
 `Attendance: ${percent}% <br>
-Last Updated: Today`
+Last Updated: ${data.updated}`
 
-let table=`
-<table>
+
+let table = `
+<table border="1" style="margin:auto;margin-top:20px">
 <tr>
 <th>Course Code</th>
 <th>Subject</th>
@@ -47,28 +48,29 @@ let table=`
 
 data.subjects.forEach(s=>{
 
-let total=parseInt(s.total)
-let present=parseInt(s.present)
+let total = parseInt(s.total)
+let present = parseInt(s.present)
 
-let percent=((present/total)*100).toFixed(2)
+let percent = ((present/total)*100).toFixed(2)
 
-let status=""
+let status = ""
 
+// accurate 75% formula
 if(present/total < 0.75){
 
-let attend=Math.ceil((0.75*total-present)/(1-0.75))
+let attend = Math.ceil((0.75*total-present)/(1-0.75))
 
-status=`Attend ${attend} classes`
+status = `Attend ${attend} classes`
 
 }else{
 
-let bunk=Math.floor((present-0.75*total)/0.75)
+let bunk = Math.floor((present-0.75*total)/0.75)
 
-status=`Bunk ${bunk} classes`
+status = `Bunk ${bunk} classes`
 
 }
 
-table+=`
+table += `
 <tr>
 <td>${s.course}</td>
 <td>${s.name}</td>
@@ -79,13 +81,13 @@ table+=`
 
 })
 
-table+="</table>"
+table += "</table>"
 
-subjects.innerHTML=table
+subjects.innerHTML = table
 
 }catch(err){
 
-result.innerHTML="Server error or backend sleeping (Render cold start). Try again."
+result.innerHTML = "Backend starting (Render cold start). Try again in a few seconds."
 
 }
 
