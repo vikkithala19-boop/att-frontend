@@ -1,17 +1,19 @@
 async function getAttendance(){
 
-let id = document.getElementById("id").value
-let pass = document.getElementById("pass").value
+let id=document.getElementById("id").value
+let pass=document.getElementById("pass").value
 
-let result = document.getElementById("result")
-let subjects = document.getElementById("subjects")
+let result=document.getElementById("result")
+let subjects=document.getElementById("subjects")
+let bunkSection=document.getElementById("bunkSection")
 
-result.innerHTML = "Irunga bhai..."
-subjects.innerHTML = ""
+result.innerHTML="Irunga bhai..."
+subjects.innerHTML=""
+bunkSection.innerHTML=""
 
 try{
 
-let res = await fetch("https://att-backend-lzzv.onrender.com/attendance",{
+let res=await fetch("https://att-backend-lzzv.onrender.com/attendance",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -22,22 +24,21 @@ password:pass
 })
 })
 
-let data = await res.json()
+let data=await res.json()
 
 if(data.error){
-result.innerHTML = data.error
+result.innerHTML=data.error
 return
 }
 
-let percent = data.attendance
+let percent=data.attendance
 
-result.innerHTML =
+result.innerHTML=
 `Attendance: ${percent}% <br>
 Last Updated: ${data.updated}`
 
-
-let table = `
-<table border="1" style="margin:auto;margin-top:20px">
+let table=`
+<table>
 <tr>
 <th>Course Code</th>
 <th>Subject</th>
@@ -48,29 +49,47 @@ let table = `
 
 data.subjects.forEach(s=>{
 
-let total = parseInt(s.total)
-let present = parseInt(s.present)
+let total=parseInt(s.total)
+let present=parseInt(s.present)
 
-let percent = ((present/total)*100).toFixed(2)
+let percent=((present/total)*100).toFixed(2)
 
-let status = ""
+let status=""
+let bunkHTML=""
 
-// accurate 75% formula
 if(present/total < 0.75){
 
-let attend = Math.ceil((0.75*total-present)/(1-0.75))
+let attend=Math.ceil((0.75*total-present)/(1-0.75))
 
-status = `Attend ${attend} classes`
+status=`📚 Attend ${attend} classes`
+
+bunkHTML+=`
+<div class="bunkCard">
+<h3>${s.name}</h3>
+<p>${percent}%</p>
+<p>📚 Attend ${attend}</p>
+<img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
+</div>
+`
 
 }else{
 
-let bunk = Math.floor((present-0.75*total)/0.75)
+let bunk=Math.floor((present-0.75*total)/0.75)
 
-status = `Bunk ${bunk} classes`
+status=`😎 Bunk ${bunk} classes`
+
+bunkHTML+=`
+<div class="bunkCard">
+<h3>${s.name}</h3>
+<p>${percent}%</p>
+<p>😎 Bunk ${bunk}</p>
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+</div>
+`
 
 }
 
-table += `
+table+=`
 <tr>
 <td>${s.course}</td>
 <td>${s.name}</td>
@@ -79,15 +98,17 @@ table += `
 </tr>
 `
 
+bunkSection.innerHTML+=bunkHTML
+
 })
 
-table += "</table>"
+table+="</table>"
 
-subjects.innerHTML = table
+subjects.innerHTML=table
 
 }catch(err){
 
-result.innerHTML = "Backend starting (Render cold start). Try again in a few seconds."
+result.innerHTML="Backend starting (Render cold start). Try again."
 
 }
 
