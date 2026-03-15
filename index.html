@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,92 +8,20 @@
 
 <title>PSG Attendance Tracker</title>
 
-<style>
-
-body{
-background:#0f172a;
-color:white;
-font-family:Arial;
-text-align:center;
-padding-top:40px;
-}
-
-h1{
-font-size:40px;
-margin-bottom:10px;
-}
-
-h2{
-color:#38bdf8;
-margin-bottom:30px;
-}
-
-input{
-padding:10px;
-margin:10px;
-width:200px;
-border-radius:5px;
-border:none;
-font-size:16px;
-}
-
-button{
-padding:10px 20px;
-background:#10b981;
-border:none;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#059669;
-}
-
-#result{
-margin-top:20px;
-font-size:18px;
-}
-
-table{
-margin:auto;
-margin-top:20px;
-border-collapse:collapse;
-}
-
-th,td{
-border:1px solid white;
-padding:10px 15px;
-}
-
-th{
-background:#1e293b;
-}
-
-.footer{
-margin-top:40px;
-font-size:14px;
-}
-
-a{
-color:#38bdf8;
-text-decoration:none;
-}
-
-a:hover{
-text-decoration:underline;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>Vanakkam da mapla 😎</h1>
 <h2>College uh ku olunga vada</h2>
 
 <h3>PSG Attendance Tracker</h3>
+
+<div class="loginBox">
 
 <input id="id" placeholder="Roll Number">
 
@@ -100,9 +29,13 @@ text-decoration:underline;
 
 <button onclick="getAttendance()">Check Attendance</button>
 
+</div>
+
 <div id="result"></div>
 
 <div id="subjects"></div>
+
+<div id="bunkSection"></div>
 
 <div class="footer">
 
@@ -113,6 +46,8 @@ For suggestions / requirements contact
 @wikii._.15
 </a>
 </p>
+
+</div>
 
 </div>
 
