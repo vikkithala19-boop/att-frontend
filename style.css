@@ -1,42 +1,116 @@
 body{
-font-family:Arial;
-background:#111;
+background:#0f172a;
 color:white;
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+padding:0;
 text-align:center;
-margin-top:100px;
+}
+
+.container{
+padding-top:40px;
+}
+
+h1{
+font-size:42px;
+margin-bottom:5px;
+}
+
+h2{
+color:#38bdf8;
+margin-bottom:30px;
+}
+
+.loginBox{
+margin-top:20px;
 }
 
 input{
-padding:10px;
+padding:12px;
 margin:10px;
+width:220px;
+border-radius:6px;
 border:none;
-border-radius:5px;
+font-size:16px;
 }
 
 button{
-padding:10px 20px;
-background:#00ffaa;
+padding:12px 25px;
+background:#10b981;
 border:none;
-border-radius:5px;
+border-radius:6px;
+font-size:16px;
 cursor:pointer;
+color:white;
 }
 
 button:hover{
-background:#00ddaa;
+background:#059669;
 }
 
 #result{
-margin-top:20px;
-font-size:20px;
+margin-top:25px;
+font-size:18px;
 }
 
 table{
 margin:auto;
-margin-top:20px;
+margin-top:30px;
 border-collapse:collapse;
+background:#1e293b;
+border-radius:8px;
+overflow:hidden;
 }
 
-td,th{
-padding:10px;
-border:1px solid white;
+th,td{
+padding:12px 18px;
+border-bottom:1px solid #334155;
+}
+
+th{
+background:#020617;
+}
+
+tr:hover{
+background:#334155;
+}
+
+#bunkSection{
+margin-top:40px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+}
+
+.bunkCard{
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+width:230px;
+box-shadow:0px 4px 12px rgba(0,0,0,0.3);
+}
+
+.bunkCard h3{
+margin-top:0;
+}
+
+.bunkCard img{
+width:70px;
+margin-top:10px;
+}
+
+.footer{
+margin-top:40px;
+font-size:14px;
+color:#94a3b8;
+}
+
+a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+a:hover{
+text-decoration:underline;
 }
