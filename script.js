@@ -83,7 +83,7 @@ bunkHTML+=`
 <h3>${s.name}</h3>
 <p>${percent}%</p>
 <p>😎 Bunk ${bunk}</p>
-<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+<img src="https://giphy.com/gifs/dhurandhar-akshay-khanna-balochi-arabic-song-YtLxH12xAeQoFMtYMl">
 </div>
 `
 
