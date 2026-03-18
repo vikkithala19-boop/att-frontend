@@ -64,14 +64,14 @@ if(present/total < 0.75){
 
 let attend=Math.ceil((0.75*total-present)/(1-0.75))
 
-status=`📚 Attend ${attend}`
+status=` Attend ${attend}`
 cls="bad"
 
 bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
 <p>📊 ${percent}%</p>
-<p class="bad">📚 Attend ${attend}</p>
+<p class="bad"> Attend ${attend}</p>
 <img src="https://c.tenor.com/Xct9xIPBqsMAAAAC/tenor.gif">
 </div>
 `
@@ -80,14 +80,14 @@ bunkHTML+=`
 
 let bunk=Math.floor((present-0.75*total)/0.75)
 
-status=`😎 Bunk ${bunk}`
+status=` Bunk ${bunk}`
 cls="good"
 
 bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
 <p>📊 ${percent}%</p>
-<p class="good">😎 Bunk ${bunk}</p>
+<p class="good"> Bunk ${bunk}</p>
 <img src="https://c.tenor.com/KfYF3hN9UfkAAAAC/tenor.gif">
 </div>
 `
