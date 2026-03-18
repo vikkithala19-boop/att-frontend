@@ -68,7 +68,7 @@ bunkHTML+=`
 <h3>${s.name}</h3>
 <p>${percent}%</p>
 <p>📚 Attend ${attend}</p>
-<img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
+<img src="https://c.tenor.com/Xct9xIPBqsMAAAAC/tenor.gif">
 </div>
 `
 
