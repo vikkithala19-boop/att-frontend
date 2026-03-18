@@ -7,7 +7,7 @@ let result=document.getElementById("result")
 let subjects=document.getElementById("subjects")
 let bunkSection=document.getElementById("bunkSection")
 
-result.innerHTML="Loading attendance data..."
+result.innerHTML="⏳ Loading bro..."
 subjects.innerHTML=""
 bunkSection.innerHTML=""
 
@@ -27,18 +27,16 @@ password:pass
 let data=await res.json()
 
 if(data.error){
-result.innerHTML=`<span class="error">${data.error}</span>`
+result.innerHTML="❌ "+data.error
 return
 }
 
 let percent=data.attendance
 
-result.innerHTML=`
-<div>
-<b>Overall Attendance:</b> ${percent}% <br>
-<b>Last Updated:</b> ${data.updated}
-</div>
-`
+result.innerHTML=
+`📊 <b>Attendance:</b> ${percent}% <br>
+📅 <b>Last Updated:</b> ${data.updated}`
+
 
 // TABLE
 let table=`
@@ -46,7 +44,7 @@ let table=`
 <tr>
 <th>Code</th>
 <th>Subject</th>
-<th>Attendance</th>
+<th>%</th>
 <th>Status</th>
 </tr>
 `
@@ -66,14 +64,15 @@ if(present/total < 0.75){
 
 let attend=Math.ceil((0.75*total-present)/(1-0.75))
 
-status=`Attend ${attend} classes`
+status=`📚 Attend ${attend}`
 cls="bad"
 
-bunkHTML=`
+bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
-<p>${percent}%</p>
-<p class="bad">Attend ${attend}</p>
+<p>📊 ${percent}%</p>
+<p class="bad">📚 Attend ${attend}</p>
+<img src="https://c.tenor.com/Xct9xIPBqsMAAAAC/tenor.gif">
 </div>
 `
 
@@ -81,14 +80,15 @@ bunkHTML=`
 
 let bunk=Math.floor((present-0.75*total)/0.75)
 
-status=`Can miss ${bunk} classes`
+status=`😎 Bunk ${bunk}`
 cls="good"
 
-bunkHTML=`
+bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
-<p>${percent}%</p>
-<p class="good">Bunk ${bunk}</p>
+<p>📊 ${percent}%</p>
+<p class="good">😎 Bunk ${bunk}</p>
+<img src="https://c.tenor.com/KfYF3hN9UfkAAAAC/tenor.gif">
 </div>
 `
 
@@ -113,7 +113,7 @@ subjects.innerHTML=table
 
 }catch(err){
 
-result.innerHTML="Server is waking up. Please try again."
+result.innerHTML="⚠️ Backend waking up... try again 😴"
 
 }
 
