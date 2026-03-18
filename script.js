@@ -7,7 +7,7 @@ let result=document.getElementById("result")
 let subjects=document.getElementById("subjects")
 let bunkSection=document.getElementById("bunkSection")
 
-result.innerHTML="⏳ Loading bro..."
+result.innerHTML="⏳ Irunga Bhai..."
 subjects.innerHTML=""
 bunkSection.innerHTML=""
 
@@ -71,7 +71,7 @@ bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
 <p>📊 ${percent}%</p>
-<p class="bad">📚 Attend ${attend}</p>
+<p class="bad"> Attend ${attend}</p>
 <img src="https://c.tenor.com/Xct9xIPBqsMAAAAC/tenor.gif">
 </div>
 `
@@ -87,7 +87,7 @@ bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
 <p>📊 ${percent}%</p>
-<p class="good">😎 Bunk ${bunk}</p>
+<p class="good"> Bunk ${bunk}</p>
 <img src="https://c.tenor.com/KfYF3hN9UfkAAAAC/tenor.gif">
 </div>
 `
