@@ -83,7 +83,7 @@ bunkHTML+=`
 <h3>${s.name}</h3>
 <p>${percent}%</p>
 <p>😎 Bunk ${bunk}</p>
-<img src="https://i.makeagif.com/media/12-12-2025/RLQfwv.gif">
+<img src="https://c.tenor.com/KfYF3hN9UfkAAAAC/tenor.gif">
 </div>
 `
 
