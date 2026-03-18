@@ -7,7 +7,7 @@ let result=document.getElementById("result")
 let subjects=document.getElementById("subjects")
 let bunkSection=document.getElementById("bunkSection")
 
-result.innerHTML="Irunga bhai..."
+result.innerHTML="⏳ Loading bro..."
 subjects.innerHTML=""
 bunkSection.innerHTML=""
 
@@ -27,22 +27,24 @@ password:pass
 let data=await res.json()
 
 if(data.error){
-result.innerHTML=data.error
+result.innerHTML="❌ "+data.error
 return
 }
 
 let percent=data.attendance
 
 result.innerHTML=
-`Attendance: ${percent}% <br>
-Last Updated: ${data.updated}`
+`📊 <b>Attendance:</b> ${percent}% <br>
+📅 <b>Last Updated:</b> ${data.updated}`
 
+
+// TABLE
 let table=`
 <table>
 <tr>
-<th>Course Code</th>
+<th>Code</th>
 <th>Subject</th>
-<th>Attendance</th>
+<th>%</th>
 <th>Status</th>
 </tr>
 `
@@ -55,19 +57,21 @@ let present=parseInt(s.present)
 let percent=((present/total)*100).toFixed(2)
 
 let status=""
+let cls=""
 let bunkHTML=""
 
 if(present/total < 0.75){
 
 let attend=Math.ceil((0.75*total-present)/(1-0.75))
 
-status=`📚 Attend ${attend} classes`
+status=`📚 Attend ${attend}`
+cls="bad"
 
 bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
-<p>${percent}%</p>
-<p>📚 Attend ${attend}</p>
+<p>📊 ${percent}%</p>
+<p class="bad">📚 Attend ${attend}</p>
 <img src="https://c.tenor.com/Xct9xIPBqsMAAAAC/tenor.gif">
 </div>
 `
@@ -76,13 +80,14 @@ bunkHTML+=`
 
 let bunk=Math.floor((present-0.75*total)/0.75)
 
-status=`😎 Bunk ${bunk} classes`
+status=`😎 Bunk ${bunk}`
+cls="good"
 
 bunkHTML+=`
 <div class="bunkCard">
 <h3>${s.name}</h3>
-<p>${percent}%</p>
-<p>😎 Bunk ${bunk}</p>
+<p>📊 ${percent}%</p>
+<p class="good">😎 Bunk ${bunk}</p>
 <img src="https://c.tenor.com/KfYF3hN9UfkAAAAC/tenor.gif">
 </div>
 `
@@ -94,7 +99,7 @@ table+=`
 <td>${s.course}</td>
 <td>${s.name}</td>
 <td>${percent}%</td>
-<td>${status}</td>
+<td class="${cls}">${status}</td>
 </tr>
 `
 
@@ -108,7 +113,7 @@ subjects.innerHTML=table
 
 }catch(err){
 
-result.innerHTML="Backend starting (Render cold start). Try again."
+result.innerHTML="⚠️ Backend waking up... try again 😴"
 
 }
 
